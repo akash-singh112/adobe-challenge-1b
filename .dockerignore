@@ -1,0 +1,47 @@
+__pycache__/
+*.pyc
+*.pyo
+.Python
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+
+# Jupyter notebooks
+*.ipynb
+.ipynb_checkpoints/
+
+# Models (will be downloaded during build)
+models/
+*.bin
+*.safetensors
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Git files
+.git/
+.gitignore
+
+# Output and logs
+output.json
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Large files not needed
+*.zip
+*.tar.gz
+
+# Original requirements (use docker-specific one)
+requirements.txt
+
+sample_input.json
+sample_output.json

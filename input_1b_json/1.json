@@ -1,0 +1,19 @@
+{
+    "challenge_info": {
+        "challenge_id": "round_1b_002",
+        "test_case_name": "travel_planner",
+        "description": "France Travel"
+    },
+    "documents": [
+        {
+            "filename": "file1.pdf",
+            "title": "South of France - Cities"
+        }
+    ],
+    "persona": {
+        "role": "Meaning of the ODL"
+    },
+    "job_to_be_done": {
+        "task": "Tell me what the ODL could mean for anyone"
+    }
+}
