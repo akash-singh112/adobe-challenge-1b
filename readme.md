@@ -34,38 +34,6 @@ adobe-challenge/
 ├── Dockerfile                       # Docker configuration
 ├── requirements-docker.txt          # Docker dependencies
 └── requirements.txt                 # Full dependencies
-```
-
-## 🛠 Installation
-
-### Local Development
-
-1. **Clone the repository**
-
-   ```bash
-   git clone <repository-url>
-   cd adobe-challenge
-   ```
-
-2. **Create virtual environment**
-
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   ```
-
-3. **Install dependencies**
-
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. **Download the pre-trained model** (if not included)
-   ```python
-   from sentence_transformers import SentenceTransformer
-   model = SentenceTransformer('all-mpnet-base-v2')
-   model.save('semantic_heading_ranker')
-   ```
 
 ### Docker Deployment
 
@@ -77,10 +45,7 @@ adobe-challenge/
 
 2. **Run the container**
    ```bash
-   docker run -v $(pwd)/input_1b_pdfs:/app/input_1b_pdfs \
-              -v $(pwd)/input_1b_json:/app/input_1b_json \
-              -v $(pwd)/output:/app/output \
-              adobe-challenge
+   docker run -d --name adobe-challenge-work -v "%cd%\input_1b_pdfs":/app/input_1b_pdfs -v "%cd%\input_1b_json":/app/input_1b_json -v "%cd%\output":/app/output -v "%cd%\headings_classified":/app/headings_classified adobe-challenge sleep infinity
    ```
 
 ## 🎯 Usage
@@ -88,6 +53,8 @@ adobe-challenge/
 ### Input Format
 
 **PDF Documents**: Place your PDF files in `input_1b_pdfs`
+
+**Output of 1a**: Place the output of 1a in `headings_classified`
 
 **Configuration JSON**: Create input files in `input_1b_json` with this structure:
 
@@ -113,18 +80,18 @@ adobe-challenge/
 }
 ```
 
-### Running the Analysis
+### Running the Analysis (Inside docker container)
 
 1. **Process PDFs and extract structure**
 
    ```bash
-   python hf.py
+   docker exec adobe-challenge-work python hf.py
    ```
 
 2. **Run semantic analysis**
 
    ```bash
-   python app.py
+   docker exec adobe-challenge-work python app.py
    ```
 
 3. **Check results** in `output/output.json`
@@ -238,4 +205,4 @@ This project is part of the Adobe Challenge submission.
 
 ---
 
-\*\*Built with ❤️ for the Adobe
+\*\*Built with ❤️ for Adobe
